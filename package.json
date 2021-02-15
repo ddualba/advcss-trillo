@@ -1,5 +1,6 @@
 {
   "name": "trillo",
+  "homepage": "https://ddualba.github.io/advcss-trillo",
   "version": "1.0.0",
   "description": "Trillo app",
   "main": "index.js",
@@ -8,20 +9,27 @@
     "devserver": "live-server",
     "start": "npm-run-all --parallel devserver watch:sass",
     "compile:sass": "node-sass sass/main.scss css/style.comp.css",
-    "prefix:css": "postcss --use autoprefixer -b 'last 10 versions' css/style.comp.css -o css/style.prefix.css",
+    "prefix:css": "postcss --use autoprefixer -b 'last 10 versions' ./css/style.comp.css -o ./css/style.prefix.css",
     "compress:css": "node-sass css/style.prefix.css css/style.css --output-style compressed",
-    "build:css": "npm-run-all compile:sass prefix:css compress:css"
+    "build:css": "npm-run-all compile:sass prefix:css compress:css",
+    "build1": "cpy css/style.css build/css",
+    "build2": "cpy img/*.* build/img",
+    "build3": "cpy index.html build",
+    "build": "npm-run-all build1 build2 build3",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "author": "Jonas",
   "license": "ISC",
   "devDependencies": {
     "autoprefixer": "^7.1.4",
+    "cpy-cli": "^3.1.1",
+    "gh-pages": "^3.1.0",
     "live-server": "^1.2.1",
-    "node-sass": "^4.5.3",
-    "npm-run-all": "^4.1.1",
-    "postcss-cli": "^4.1.1"
+    "node-sass": "^5.0.0",
+    "npm-run-all": "^4.1.5",
+    "postcss": "^8.2.4",
+    "postcss-cli": "^8.3.1"
   },
-  "dependencies": {
-    "postcss": "^8.2.5"
-  }
+  "dependencies": {}
 }
